@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Room Exam Sprint</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Examination Seating Arrangement System</h1>
+        
+        <div class="input-form">
+            <label>Room Configurations (Room:Benches)</label>
+            <input type="text" id="roomConfig" placeholder="Eg: Room A:5, Room B:12, Room C:8">
+
+            <label>Enter Student Ranges (Start-End-Branch)</label>
+            <textarea id="studentList" rows="6" placeholder="101-178-it&#10;201-250-csd&#10;301-340-ece"></textarea>
+
+            <button onclick="executeVariableRoomSprint()">Generate Seating Sprint</button>
+        </div>
+
+        <div id="outputArea"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
