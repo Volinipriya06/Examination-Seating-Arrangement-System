@@ -1,0 +1,17 @@
+body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f4; padding: 20px; }
+.container { background: white; max-width: 900px; margin: auto; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+h1 { text-align: center; margin-bottom: 30px; font-weight: 800; }
+
+input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+button { width: 100%; padding: 15px; background-color: #34495e; color: white; border: none; font-size: 1.1rem; cursor: pointer; border-radius: 4px; margin: 20px 0; font-weight: bold; }
+
+.room-section { margin-top: 40px; border: 2px solid #333; padding: 15px; border-radius: 5px; }
+.room-title { background: #333; color: white; padding: 10px; margin: -15px -15px 15px -15px; text-align: center; font-weight: bold; }
+
+table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+th, td { border: 1px solid #333; padding: 12px; text-align: center; font-weight: bold; }
+
+.warning-note { border: 2px dashed #be123c; border-radius: 8px; background-color: #fff1f2; padding: 20px; margin-top: 20px; text-align: center; }
+.alert-title { color: #be123c; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; }
+.tag-container { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 15px; }
+.student-pill { background: #be123c; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
