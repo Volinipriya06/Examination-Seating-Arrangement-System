@@ -1,0 +1,11 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+*.tar
+docker-compose.override.yml
+
+# Jenkins
+build/
+workspace/

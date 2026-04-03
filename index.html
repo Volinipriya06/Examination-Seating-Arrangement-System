@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Seating Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Exam Seating Dashboard</h1>
+        
+        <div class="input-form">
+            <div class="form-row">
+                <div class="input-group">
+                    <label>Room Dimensions (Name:RowsxCols)</label>
+                    <input type="text" id="roomConfig" placeholder="Room A:4x3, Hall 1:6x4">
+                    <small>Example: 4x3 = 4 Rows, 3 Benches per row</small>
+                </div>
+                <div class="input-group">
+                    <label>Detained/Excluded Roll Nos</label>
+                    <input type="text" id="excludedStudents" placeholder="105, 112...">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Student Ranges (Start-End-Branch)</label>
+                <textarea id="studentList" rows="5" placeholder="101-178-it&#10;201-250-csd"></textarea>
+            </div>
+
+            <button onclick="executeCreativeGrid()">GENERATE VISUAL MAP</button>
+        </div>
+
+        <div id="outputArea"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
