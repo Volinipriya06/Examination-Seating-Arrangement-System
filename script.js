@@ -137,7 +137,7 @@ function executeCreativeGrid() {
                     <div>
                         <strong>Room Full. </strong> Moving to ${nextRoom}:
                         <div class="next-queue">
-                            ${finalOrder.slice(studentIndex, studentIndex + 0).map(s => `<span class="queue-pill">${s}</span>`).join('')}
+                            ${finalOrder.slice(studentIndex, studentIndex + 5).map(s => `<span class="queue-pill">${s}</span>`).join('')}
                             ${finalOrder.length > studentIndex + 0 ? `<small>+${finalOrder.length - (studentIndex + 0)} more</small>` : ''}
                         </div>
                     </div>
