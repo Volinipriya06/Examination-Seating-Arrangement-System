@@ -88,6 +88,24 @@ button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(99, 102,
     align-items: center;
     gap: 15px;
 }
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .seat-card {
+        font-size: 0.8rem;
+    }
+}
+
+* {
+    transition: all 0.2s ease-in-out;
+}
 .alert-icon { font-size: 1.5rem; }
 .next-queue { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
 .queue-pill { background: white; border: 1px solid #be123c; color: #be123c; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 700; }
