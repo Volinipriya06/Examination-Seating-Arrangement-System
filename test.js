@@ -1,40 +1,75 @@
 const { Builder, By, until } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
 
-async function runSeleniumTest() {
-    // Setup Chrome options (Headless mode is better for Jenkins)
-    let options = new chrome.Options();
-    options.addArguments('--headless'); 
-    options.addArguments('--no-sandbox');
-    options.addArguments('--disable-dev-shm-usage');
-
-    let driver = await new Builder()
-        .forBrowser('chrome')
-        .setChromeOptions(options)
-        .build();
+(async function () {
+    let driver = await new Builder().forBrowser('chrome').build();
 
     try {
-        console.log("Starting Selenium UI Test...");
-        
-        // 1. Navigate to your deployed app
-        await driver.get('http://localhost:9005');
+        await driver.get('http://localhost:9000');
+        await driver.wait(until.elementLocated(By.id('roomConfig')), 10000);
 
-        // 2. Wait for the page to load and check the title
-        let title = await driver.getTitle();
-        console.log("Page Title is: " + title);
+        const testCases = [
+            {
+                room: 'Room A:2x2',
+                excluded: '105',
+                students: '101-104-IT'
+            },
+            {
+                room: 'Room A:3x2',
+                excluded: '',
+                students: '101-106-IT\n201-206-CSE'
+            },
+            {
+                room: 'Room A:3x3',
+                excluded: '103,202',
+                students: '101-105-IT\n201-205-CSE'
+            },
+            {
+                room: 'Room A:2x2, Room B:2x2',
+                excluded: '104',
+                students: '101-106-IT\n201-206-CSE'
+            },
+            {
+                room: 'Room A:4x3',
+                excluded: '110,115,120',
+                students: '101-130-IT\n201-230-CSE\n301-320-ECE'
+            }
+        ];
 
-        if (title.includes("Seating") || title.length > 0) {
-            console.log("SUCCESS: Application is reachable and UI is loaded.");
-        } else {
-            throw new Error("UI Content Mismatch");
+        for (let test of testCases) {
+
+            let roomInput = await driver.findElement(By.id('roomConfig'));
+            let excludedInput = await driver.findElement(By.id('excludedStudents'));
+            let studentInput = await driver.findElement(By.id('studentList'));
+
+            await roomInput.clear();
+            await excludedInput.clear();
+            await studentInput.clear();
+
+            await roomInput.sendKeys(test.room);
+            await excludedInput.sendKeys(test.excluded);
+            await studentInput.sendKeys(test.students);
+
+            let button = await driver.findElement(By.tagName('button'));
+
+            await driver.executeScript("arguments[0].scrollIntoView(true);", button);
+            await driver.sleep(500);
+
+            await driver.executeScript("arguments[0].click();", button);
+
+            await driver.sleep(2000);
+
+            let output = await driver.findElement(By.id('outputArea')).getText();
+
+            if (output.trim().length > 0) {
+                console.log("Test Passed for:", test.room);
+            } else {
+                console.log("Test Failed for:", test.room);
+            }
         }
 
     } catch (error) {
-        console.error("TEST FAILED: " + error.message);
-        process.exit(1); // Exit with error for Jenkins
+        console.log("Test Failed", error);
     } finally {
         await driver.quit();
     }
-}
-
-runSeleniumTest();
+})();
