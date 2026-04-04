@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat 'echo "CI/CD Test Passed"'
+                bat 'node test.js'
             }
         }
         stage('Deploy to Docker') {
