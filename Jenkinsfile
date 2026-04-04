@@ -20,18 +20,14 @@ pipeline {
                 bat 'echo "ALL TESTS COMPLETED SUCCESSFULLY."'
             }
         }
-        stage('Deploy to Docker') {
-            steps {
-                script {
-                    // Force clear any old container blocking the name
-                    bat 'docker rm -f exam-system || ver > nul'
-                    
-                    // Use Port 9000 to avoid the 'bind' error on 8080
-                    bat 'docker run -d -p 9000:80 --name exam-system examination-seating-arrangement-system'
-                    
-                    echo "SUCCESS! Visit http://localhost:9000"
-                }
-            }
+       stage('Deploy to Docker') {
+    steps {
+        script {
+            bat 'docker rm -f exam-system || echo no container'
+            bat 'docker run -d -p 9001:80 --name exam-system examination-seating-arrangement-system'
+            echo "SUCCESS! Visit http://localhost:9001"
         }
+    }
+}
     }
 }
