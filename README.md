@@ -1,61 +1,45 @@
 # 🎓 Exam Seating Sprint Coordinator (v2.0)
-A professional, Scrum-based Examination Seating Arrangement System designed to automate complex academic logistics. This version introduces Physical Grid Visualization, Exclusion Handling, and Regex-based Roll Number Expansion.
 
-## 🚀 Scrum Methodology in This Project
-This project treats examination logistics as an **Agile Sprint**. By applying Scrum principles, resource allocation is balanced and transparent.
+A professional, Scrum-based **Examination Seating Arrangement System** designed to automate complex academic logistics. This system treats examination hall management as an **Agile Sprint**, ensuring transparent resource allocation and automated branch interleaving.
 
-### 📋 Scrum Artifacts
-* **Product Backlog:** The "Student List" input, where roll number ranges (e.g., 23501A1201-23501A1260-IT) represent the total work to be completed.
+## 🚀 The Scrum Methodology
+This project moves beyond simple lists by applying Agile principles to physical space:
 
-* **Sprint Capacity (Velocity):** Defined by the Rows x Cols input. Each "Seat Card" represents a unit of capacity.
+* **Product Backlog:** The raw student list where roll number ranges (e.g., `23501A1201-23501A1260-IT`) represent the total work to be completed.
+* **Sprint Capacity:** Defined by the **Rows x Benches** input. Each seat represents a unit of capacity.
+* **Definition of Done (DoD):** A fully rendered visual grid map where no two students from the same branch sit on the same bench (Anti-Copying Logic).
+* **Sprint Carry-over:** A built-in **Visual Overflow Architecture** that alerts the coordinator when the backlog exceeds room capacity, automatically moving remaining students to the next "Sprint" (Venue).
 
-* **Definition of Done (DoD):** A visual grid map where no two students from the same branch sit on the same bench.
-
-* **Sprint Carry-over:** The Visual Overflow Architecture alerts the coordinator when the "backlog" exceeds a room's capacity, moving remaining students to the next "Sprint" (Venue).
+## 💻 Tech Stack
+* **Frontend:** HTML5, CSS3 (Advanced Grid/Flexbox), JavaScript (ES6+)
+* **DevOps:** Docker (Nginx Alpine), Jenkins (Pipeline as Code)
+* **Testing:** Selenium WebDriver (Automated UI Validation)
+* **Design:** Inter Typography, High-Contrast Dashboard UI
 
 ## 🛠️ Key Technical Features
+
 ### 1. Regex-Based Suffix Expansion
-The system uses a sophisticated Regular Expression engine to identify the numeric suffix of complex roll numbers.
-
-* **Action:** It maintains leading zeros (e.g., 09 doesn't become 9) to ensure data integrity for university portals.
-
-* **Logic:** const matchStart = startStr.match(/(\d+)$/);
+The system uses a sophisticated Regular Expression engine to identify and expand numeric suffixes. It intelligently maintains leading zeros (e.g., `09` does not become `9`) to ensure data integrity for university portals.
+> **Logic:** `const matchStart = startStr.match(/(\d+)$/);`
 
 ### 2. Physical Classroom Grid Rendering
-Instead of simple tables, the system renders a physical map of the room using CSS Grid.
+Instead of abstract tables, the system renders a physical map using **CSS Grid**. 
+* **Bench Cards:** Each card represents a physical bench with two distinct slots (Left and Right).
+* **Dynamic Columns:** The UI automatically adjusts columns based on the `Rows x Cols` input.
 
-* **Bench Cards:** Each card represents a bench, containing two distinct seat slots (Left and Right).
-
-* **Dynamic Columns:** Inputting Hall: 6x4 automatically adjusts the UI to render exactly 4 columns of benches.
-
-### 3. Detained/Exclusion Logic
-A dedicated input field allows for the exclusion of students who are detained or absent. The engine cross-references this list during the "Sprint Refinement" phase and skips them automatically.
+### 3. Detained & Exclusion Logic
+Includes a dedicated refinement phase where the engine cross-references a "Detained" list and skips those roll numbers automatically while maintaining the interleaving sequence.
 
 ### 4. Branch Interleaving (Anti-Copying)
-The system employs a * **Resource Leveling** algorithm. It separates students by branch and "picks" them in a round-robin fashion, ensuring that every seat adjacent to a student belongs to a different branch.
+Uses a **Resource Leveling** algorithm to separate students by branch. It employs a round-robin "picking" method to ensure that students from the same department are never seated next to each other.
 
-## 📂 File Structure
-* `index.html`: The Scrum Dashboard (Modern UI with Inter font).
+## 📦 DevOps & CI/CD
 
-* `style.css`: Visual Identity (Seat cards, hover effects, and branch pill tags).
+### **Docker Deployment**
+The app is containerized using Nginx for high-performance static serving.
+```bash
+# Build the image
+docker build -t exam-system .
 
-* `script.js`: The Allocation Engine (Regex logic, interleaving, and grid generation).
-
-## 👨‍💻 Developer Contributions (Individual Project)
-As the sole developer and architect, I handled:
-
-* **UI/UX Design:** Implementing a high-contrast dashboard with responsive grid layouts and CSS transitions.
-
-* **Logic Engine:** Developing the range expansion regex and the branch interleaving algorithm for multi-branch support.
-
-* **Deployment Strategy:** Creating the "Visual Map" architecture to aid physical hall invigilation and overflow management.
-
-## 📝 How to Use
-**Define Dimensions:** Enter your venues (e.g., Lab A: 4x3) representing Rows and Benches per row.
-
-**Filter Students:** Add any detained roll numbers to the exclusion box.
-
-**Refine Backlog:** Enter ranges in Start-End-Branch format.
-
-
-Execute: Click **GENERATE VISUAL MAP** to produce the invigilation-ready seating chart.
+# Run the container
+docker run -d -p 9001:80 --name exam-system exam-system
